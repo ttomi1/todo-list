@@ -1,19 +1,53 @@
-#comments {
-  margin-top: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  max-width: 500px;
-  background-color: #f9f9f9;
+*{
+  font-family: "Open Sans";
 }
 
-.comment-box {
-  margin-bottom: 10px;
-  padding: 5px;
-  border-bottom: 1px solid #ddd;
+h1{
+  background-color: #a6ddf5;
+  margin: 0;
+  padding: 41px;
+  text-shadow: -4px 6px 9px rgba(0,0,0,0.6);
 }
 
-textarea {
-  width: 100%;
-  margin-bottom: 5px;
+.projectNav{
+  background-color: #d9fff8;
+  padding: 41px;
+}
+.toDos{
+  background-color: #f2fffd;
+}
+.ft{
+  padding: 30px;
+  background-color: #a4baff;
+}
+.project-list{
+  margin: 0;
+}
+ul{
+  list-style: none;
+  padding: 6px;
+}
+li{
+  margin: 8px;
+  padding: 4px;
+  font-size: 1.7em;
+}
+button{
+  background: none;
+  border: none;
+  transition: transform 0.2s ease
+}
+button:hover {
+  transform: scale(1.1);
+}
+.todo-container {
+  background-color: #ffffff; /* White background for contrast */
+  border: 1px solid #ddd; /* Light border for structure */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 16px; /* Space inside the container */
+  margin: 12px 0; /* Space between to-do items */
+  display: flex; /* Flexible layout for content */
+  flex-direction: column; /* Stack content vertically */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover effects */
 }

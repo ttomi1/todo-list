@@ -1,27 +1,32 @@
-<div>
-  <h2>Comment Section</h2>
-  <!-- Input Section -->
-  <div>
-    <input type="text" placeholder="Enter your username" [(ngModel)]="username" required/>
-    <br/>
-    <textarea rows="3" placeholder="Enter your comment" [(ngModel)]="comment" required></textarea>
-    <br/>
-    <button (click)="addComment()">Upload</button>
-  </div>
 
-  <!-- Comments Section -->
-  <div id="comments" *ngIf="comments.length > 0">
-    <h3>Comments:</h3>
-    <div *ngFor="let c of comments; let i = index" class="comment-box">
-      <ng-container *ngIf="!c.isEditing">
-        <strong>{{ c.username }}</strong>: {{ c.text }}
-        <button (click)="editComment(i)">Edit</button>
-      </ng-container>
-
-      <ng-container *ngIf="c.isEditing">
-        <textarea [(ngModel)]="c.text" rows="2"></textarea>
-        <button (click)="saveComment(i)">Save</button>
+<h1>TO DO LIST</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2 projectNav">
+      <ul class="project-list">
+        <li><button (click)="selectProject('Home')">Home</button></li>
+        <li><button (click)="selectToday()">Today</button></li>
+        <li><button (click)="selectWeek()">Week</button></li>
+        <hr>
+      </ul>
+      <ul>
+        <li *ngFor="let p of projects;let i = index">
+          <button (click)="selectProject(p.name)">{{p.name}}</button>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-10 toDos">
+      <ng-container *ngFor="let t of todos; let i = index">
+        <div *ngIf="(t.project.name == todoSelector) || (todoSelector == 'Home')" class="todo-container">
+          <p>{{t.title}}</p>
+          <p>{{t.details}}</p>
+        </div>
       </ng-container>
     </div>
+  </div>
+  <div class="row">
+    <footer class="col-sm-12 text-center ft">
+      Footer
+    </footer>
   </div>
 </div>
