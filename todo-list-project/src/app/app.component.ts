@@ -14,8 +14,24 @@ export class AppComponent {
 
   isAddNewProject : boolean = false;
 
+  isAddNewTodo : boolean = false;
 
-
+  newProject : Project = {
+    todo: [],
+    name: ''
+  };
+  cancleProject(){
+    this.isAddNewProject = false;
+  }
+saveProject(){
+  this.newProject.name.trim();
+  this.projects.push(this.newProject);
+  this.newProject = {todo: [], name: ''};
+  this.isAddNewProject = false;
+}
+addNewTodo(){
+    this.isAddNewTodo = true;
+}
 addNewProject(){
   this.isAddNewProject = true;
 }

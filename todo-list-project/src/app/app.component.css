@@ -46,7 +46,27 @@ button:hover {
   transform: scale(1.1);
 }
 .todo-container {
-  background-color: #ffffff; /* White background for contrast */
+  border: 1px solid #ddd; /* Light border for structure */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 16px; /* Space inside the container */
+  margin: 12px 0; /* Space between to-do items */
+  display: flex; /* Flexible layout for content */
+  flex-direction: column; /* Stack content vertically */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover effects */
+}
+
+.priority-high{
+  background: linear-gradient(to right, #ffffff, #ffffff 80%, #ff0000 100%); /* Gradient from white to red */
+}
+.priority-medium{
+  background: linear-gradient(to right, #ffffff, #ffffff 80%, #ffef00 100%); /* Gradient from white to red */
+}
+.priority-low{
+  background: linear-gradient(to right, #ffffff, #ffffff 80%, #00ff19 100%); /* Gradient from white to red */
+}
+.add-new-todo-container {
+  background: white;
   border: 1px solid #ddd; /* Light border for structure */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
@@ -80,4 +100,18 @@ transition: all 0.3s ease; /* Smooth transitions */
   text-decoration: underline;
   text-decoration-color: #00a4ff;
   text-underline-offset: 0.5rem;
+}
+
+.fontDetails{
+  font-size: 1rem;
+}
+
+.confirm{
+    background-color: #f3fffd;
+    border: 1px solid #90d7ff;
+    border-radius: 8px;
+}
+
+.alignLeft{
+  align-self: flex-start;
 }
