@@ -1,5 +1,10 @@
+
+html{
+  font-family: "Open Sans", serif;
+
+}
 *{
-  font-family: "Open Sans";
+  font-family: "Open Sans", serif;
 }
 
 h1{
@@ -50,4 +55,29 @@ button:hover {
   display: flex; /* Flexible layout for content */
   flex-direction: column; /* Stack content vertically */
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover effects */
+}
+
+.noTransition{
+  width: 4rem;
+  align-self: flex-start;
+  background-color: #f3fffd;
+  border: 1px solid #90d7ff;
+  border-radius: 8px;
+}
+.editBox{
+width: 100%; /* Make it fit the container */
+padding: 10px; /* Add padding for better appearance */
+margin: 5px 0; /* Add spacing around the textbox */
+box-sizing: border-box; /* Ensure padding is included in the width */
+font-size: 16px; /* Make the text readable */
+border: 1px solid #ccc; /* Light border */
+border-radius: 4px; /* Rounded corners for a modern look */
+outline: none; /* Remove outline on focus */
+transition: all 0.3s ease; /* Smooth transitions */
+}
+
+.addProjectButton{
+  text-decoration: underline;
+  text-decoration-color: #00a4ff;
+  text-underline-offset: 0.5rem;
 }
