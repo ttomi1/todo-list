@@ -115,3 +115,7 @@ transition: all 0.3s ease; /* Smooth transitions */
 .alignLeft{
   align-self: flex-start;
 }
+
+.todo-date{
+  max-width: 100px;
+}

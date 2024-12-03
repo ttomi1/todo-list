@@ -21,31 +21,32 @@
               <label for="title">Title:</label>
               <textarea [(ngModel)]="newProject.name" id="title" cols="16" rows="1"></textarea>
               <button class="confirm" (click)="saveProject()" [disabled]="!newProject.name">Confirm</button>
-              <button class="confirm" (click)="cancleProject()">Cancle</button>
+              <button class="confirm" (click)="cancelProject()">Cancle</button>
             </div>
           </ng-container>
         </li>
       </ul>
     </div>
     <div class="col-sm-10 toDos">
-      <ng-container *ngFor="let t of todos; let i = index" >
+      <ng-container *ngFor="let t of todos | priority : 'priority'; let i = index" >
         <ng-container *ngIf="!t.isEditing">
-        <div *ngIf="(t.project.name == todoSelector) || (todoSelector == 'Home') || (todoSelector == 'Today' && isToday(t.date)) || (todoSelector == 'Week' && isWeek(t.date))" class="todo-container" [ngClass]="{'priority-high' : t.priority == 'High', 'priority-medium' : t.priority == 'Medium', 'priority-low' : t.priority == 'Low'}">
+        <div *ngIf="(t.project == todoSelector) || (todoSelector == 'Home') || (todoSelector == 'Today' && isToday(t.date)) || (todoSelector == 'Week' && isWeek(t.date))" class="todo-container" [ngClass]="{'priority-high' : t.priority == 'High', 'priority-medium' : t.priority == 'Medium', 'priority-low' : t.priority == 'Low'}">
           <h4>{{t.title}}</h4>
           <p>{{t.details}}</p>
-          <p>{{t.date.toLocaleDateString('en-US', {weekday: 'long'})}} {{t.date.getDate()}}.{{t.date.getMonth()}}.{{t.date.getFullYear()}}.</p>
+          <p>{{ t.date | date:'fullDate' }}.</p>
           <button (click)="editTodo(i)" class="noTransition">Edit</button>
         </div>
         </ng-container>
         <ng-container *ngIf="t.isEditing">
-          <div *ngIf="(t.project.name == todoSelector) || (todoSelector == 'Home') || (todoSelector == 'Today' && isToday(t.date)) || (todoSelector == 'Week' && isWeek(t.date))" class="todo-container">
+          <div *ngIf="(t.project == todoSelector) || (todoSelector == 'Home') || (todoSelector == 'Today' && isToday(t.date)) || (todoSelector == 'Week' && isWeek(t.date))" class="todo-container">
             <h4>{{t.title}}</h4>
             <textarea class="editBox" [(ngModel)]="t.details">{{t.details}}</textarea>
-            <p>{{t.date.toLocaleDateString('en-US', {weekday: 'long'})}} {{t.date.getDate()}}.{{t.date.getMonth()}}.{{t.date.getFullYear()}}.</p>
+            <p>{{ t.date | date:'fullDate' }}.</p>
             <button (click)="saveEdit(i)" class="noTransition">Save</button>
           </div>
         </ng-container>
       </ng-container>
+      <ng-container *ngIf="todoSelector != 'Home' && todoSelector != 'Week' && todoSelector != 'Today'">
       <div class="add-new-todo-container">
         <ng-container *ngIf="!isAddNewTodo">
         <button class="addProjectButton alignLeft" (click)="addNewTodo()">Add a To do!</button>
@@ -72,11 +73,12 @@
       </textarea>
 
           <!-- To-do Date -->
-          <label for="todo-date">Due Date:</label>
+          <label for="todo-date" class="todo-date">Due Date:</label>
           <input
             type="date"
             id="todo-date"
-            [(ngModel)]="newTodo.date"
+            [(ngModel)]="formattedDate"
+            (ngModelChange)="onDateChange($event)"
             name="date"
             required />
 
@@ -109,11 +111,13 @@
 
           <!-- Action Buttons -->
           <div class="button-group">
-            <button class="confirm" type="button" (click)="saveTodo()">Save</button>
-            <button class="cancel" type="button" (click)="cancelTodo()">Cancel</button>
+            <button class="confirm" type="button" (click)="saveTodo()" [disabled]="!newTodo.title || !newTodo.details || !newTodo.priority || !newTodo.date">Save</button>
+            <button class="confirm" type="button" (click)="cancelTodo()">Cancel</button>
           </div>
         </ng-container>
+
       </div>
+      </ng-container>
     </div>
   </div>
   <div class="row">

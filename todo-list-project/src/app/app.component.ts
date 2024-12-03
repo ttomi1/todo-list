@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import {describe} from 'node:test';
 
-type Todo = {title: string, project: Project, priority: any, date: any, details: string, isEditing: boolean};
+import priority = module
+import * as module from 'module';
+
+type Todo = {title: string, project: string, priority: any, date: Date, details: string, isEditing: boolean};
 type Project = {todo: Todo[], name: string}
 @Component({
   selector: 'app-root',
@@ -15,12 +18,55 @@ export class AppComponent {
   isAddNewProject : boolean = false;
 
   isAddNewTodo : boolean = false;
+  formattedDate : string = '';
 
   newProject : Project = {
     todo: [],
     name: ''
   };
-  cancleProject(){
+
+  newTodo : Todo = {
+    title: '',
+    project: '',
+    priority: '',
+    date: new Date(),
+    details: '',
+    isEditing: false
+  };
+  saveTodo(){
+    this.newTodo.title = this.newTodo.title.trim();
+    this.newTodo.details = this.newTodo.details.trim();
+    this.newTodo.project = this.todoSelector;
+    this.todos.push(this.newTodo);
+    this.newTodo = {
+      title: '',
+      project: '',
+      priority: '',
+      date: new Date(),
+      details: '',
+      isEditing: false
+    };
+    this.formattedDate = '';
+    console.log('Save called', this.isAddNewTodo);
+    this.isAddNewTodo = false;
+    console.log('Save called', this.isAddNewTodo);
+  }
+  onDateChange(value : string){
+    this.newTodo.date = new Date(value);
+  }
+  cancelTodo(){
+    this.newTodo = {
+      title: '',
+      project: '',
+      priority: '',
+      date: new Date(),
+      details: '',
+      isEditing: false
+    };
+
+    this.isAddNewTodo = false;
+  }
+  cancelProject(){
     this.isAddNewProject = false;
   }
 saveProject(){
@@ -81,7 +127,7 @@ selectWeek(){
     todos: Todo[] = [
     {
       title: "Finish project proposal",
-      project: this.projects[0], // Work
+      project: this.projects[0].name, // Work
       priority: "High",
       date: new Date('November 25, 2024 03:24:00'),
       details: "Complete and submit the project proposal to the manager.",
@@ -89,7 +135,7 @@ selectWeek(){
     },
     {
       title: "Organize closet",
-      project: this.projects[1], // Personal
+      project: this.projects[1].name, // Personal
       priority: "Medium",
       date: new Date(),
       details: "Clean and reorganize the closet for the new season.",
@@ -97,7 +143,7 @@ selectWeek(){
     },
     {
       title: "Go for a morning jog",
-      project: this.projects[2], // Fitness
+      project: this.projects[2].name, // Fitness
       priority: "High",
       date: new Date(),
       details: "Run a 5K to improve stamina and endurance.",
@@ -105,7 +151,7 @@ selectWeek(){
     },
     {
       title: "Complete painting project",
-      project: this.projects[3], // Hobby
+      project: this.projects[3].name, // Hobby
       priority: "Low",
       date: new Date(),
       details: "Finish the watercolor painting started last week.",
@@ -113,7 +159,7 @@ selectWeek(){
     },
     {
       title: "Research vacation destinations",
-      project: this.projects[4], // Travel
+      project: this.projects[4].name, // Travel
       priority: "Medium",
       date: new Date(),
       details: "Look up destinations and activities for the summer trip.",
@@ -121,7 +167,7 @@ selectWeek(){
     },
     {
       title: "Prepare for team meeting",
-      project: this.projects[0], // Work
+      project: this.projects[0].name, // Work
       priority: "High",
       date: new Date(),
       details: "Gather slides and data for tomorrow's meeting.",
@@ -129,7 +175,7 @@ selectWeek(){
     },
     {
       title: "Buy groceries",
-      project: this.projects[1], // Personal
+      project: this.projects[1].name, // Personal
       priority: "Medium",
       date: new Date(),
       details: "Purchase items for the week, including fruits and snacks.",
@@ -137,7 +183,7 @@ selectWeek(){
     },
     {
       title: "Schedule yoga session",
-      project: this.projects[2], // Fitness
+      project: this.projects[2].name, // Fitness
       priority: "Low",
       date: new Date(),
       details: "Book a slot at the nearby yoga studio for the weekend.",
@@ -145,7 +191,7 @@ selectWeek(){
     },
     {
       title: "Learn guitar chords",
-      project: this.projects[3], // Hobby
+      project: this.projects[3].name, // Hobby
       priority: "Medium",
       date: new Date(),
       details: "Practice the new set of guitar chords learned in class.",
@@ -153,11 +199,13 @@ selectWeek(){
     },
     {
       title: "Book hotel for vacation",
-      project: this.projects[4], // Travel
+      project: this.projects[4].name, // Travel
       priority: "High",
       date: new Date(),
       details: "Confirm and book the hotel for the upcoming trip.",
       isEditing: false
     }
   ];
+
+  protected readonly priority = priority;
 }
